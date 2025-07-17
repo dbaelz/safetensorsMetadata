@@ -24,11 +24,18 @@ def read_safetensors_metadata(file_path):
 def main():
     parser = argparse.ArgumentParser(description='Read metadata from a safetensors file.')
     parser.add_argument('file', help='Path to the safetensors file')
+    parser.add_argument('--search', '-s', help='Search for a string in metadata keys/values and only print matching pairs', default=None)
     args = parser.parse_args()
 
     try:
         metadata = read_safetensors_metadata(args.file)
-        print(json.dumps(metadata, indent=2, ensure_ascii=False))
+        if args.search:
+            search = args.search.lower()
+            result = {k: v for k, v in metadata.items() if search in str(k).lower() or search in str(v).lower()}
+        else:
+            result = metadata
+            
+        print(json.dumps(result, indent=2, ensure_ascii=False))
     except Exception as e:
         print(f'Error: {e}', file=sys.stderr)
         sys.exit(1)
