@@ -1,6 +1,7 @@
 import argparse
 import sys
 import json
+import re
 
 
 def read_safetensors_metadata(file_path):
@@ -48,7 +49,15 @@ def main():
         else:
             result = filtered
 
-        print(json.dumps(result, indent=2, ensure_ascii=False))
+        if args.search:
+            def highlight(text, term):
+                pattern = re.compile(re.escape(term), re.IGNORECASE)
+                return pattern.sub(lambda m: f"\033[43;30m{m.group(0)}\033[0m", str(text))
+
+            json_str = json.dumps(result, indent=2, ensure_ascii=False)
+            result = highlight(json_str, args.search)
+        
+        print(result)
     except Exception as e:
         print(f'Error: {e}', file=sys.stderr)
         sys.exit(1)
