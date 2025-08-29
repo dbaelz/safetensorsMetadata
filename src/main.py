@@ -3,6 +3,9 @@ import sys
 import json
 import re
 
+_PROGRAM_NAME = "safetensorsMetadata"
+_PROGRAM_DESCRIPTION = "Read metadata from a safetensors file"
+_VERSION = "0.1.0"
 
 def read_safetensors_metadata(file_path):
     with open(file_path, 'rb') as file:
@@ -23,7 +26,8 @@ def read_safetensors_metadata(file_path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Read metadata from a safetensors file.')
+    parser = argparse.ArgumentParser(description=_PROGRAM_DESCRIPTION)
+    parser.add_argument("--version", action="version", version=f"{_PROGRAM_NAME}: {_PROGRAM_DESCRIPTION} - version {_VERSION}")
     parser.add_argument('file', help='Path to the safetensors file')
     parser.add_argument('--search', '-s', help='Search for a string in metadata keys/values and only print matching pairs', default=None)
     parser.add_argument('--pretty', '-p', action='store_true', help='Parse string values as unescaped JSON values')
