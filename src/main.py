@@ -7,7 +7,7 @@ _PROGRAM_NAME = "safetensorsMetadata"
 _PROGRAM_DESCRIPTION = "Read metadata from a safetensors file"
 _VERSION = "0.1.0"
 
-def read_safetensors_metadata(file_path):
+def read_safetensors_metadata(file_path: str) -> dict:
     with open(file_path, 'rb') as file:
         header_len_bytes = file.read(8)
         
@@ -25,7 +25,7 @@ def read_safetensors_metadata(file_path):
         return metadata
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description=_PROGRAM_DESCRIPTION)
     parser.add_argument("--version", action="version", version=f"{_PROGRAM_NAME}: {_PROGRAM_DESCRIPTION} - version {_VERSION}")
     parser.add_argument('file', help='Path to the safetensors file')
