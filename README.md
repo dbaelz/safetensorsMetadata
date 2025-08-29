@@ -6,7 +6,7 @@ Command line tool to extract and print the JSON metadata from a [safetensors](ht
 To extract metadata from a safetensors file:
 
 ```
-python main.py path/to/file.safetensors
+python src/main.py path/to/file.safetensors
 ```
 
 
@@ -15,9 +15,9 @@ Filter the metadata output to only show the key/value pairs containing a specifi
 
 Example:
 ```
-python main.py path/to/file.safetensors --search author
+python src/main.py path/to/file.safetensors --search author
 # or using the short flag
-python main.py path/to/file.safetensors -s author
+python src/main.py path/to/file.safetensors -s author
 ```
 
 ### Pretty-printing JSON values
@@ -32,9 +32,9 @@ Some metadata values may themselves be JSON-encoded strings. By default, these a
 To automatically parse and print such values as unescaped JSON, use the `--pretty` or `-p` flag:
 
 ```
-python main.py path/to/file.safetensors --pretty
+python src/main.py path/to/file.safetensors --pretty
 # or using the short flag
-python main.py path/to/file.safetensors -p
+python src/main.py path/to/file.safetensors -p
 ```
 
 Output:
@@ -50,7 +50,7 @@ Output:
 You can combine `--pretty` with `--search` to filter and pretty-print at the same time:
 
 ```
-python main.py path/to/file.safetensors -s info -p
+python src/main.py path/to/file.safetensors -s info -p
 ```
 
 
